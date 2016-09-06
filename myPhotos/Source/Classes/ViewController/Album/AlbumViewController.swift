@@ -111,14 +111,10 @@ class AlbumViewController:VkViewController {
     
     // MARK: - UITableView Delegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {}
-    
-    // MARK: - UITableView Delegate
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if  segue.identifier == "showPhotoController",
-            let destination = segue.destinationViewController as? PhotoViewController,
-            albumIndex = tableView.indexPathForSelectedRow?.row {
-            destination.album = albums[albumIndex]
-        }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let viewController:PhotoViewController = PhotoViewController()
+        viewController.album = albums[indexPath.row]
+        self.navigationController?.pushViewController(viewController, animated: true)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }

@@ -16,7 +16,54 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="venzel" translatesAutoresizingMaskIntoConstraints="NO" id="Vvu-pv-t2R">
+                                <rect key="frame" x="50" y="100" width="220" height="71"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="71" id="8ol-pe-3dP"/>
+                                    <constraint firstAttribute="width" constant="220" id="NrB-df-YYA"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Мои VK фото" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="PdZ-wm-zi4">
+                                <rect key="frame" x="70" y="196" width="180" height="26"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="NOt-nX-oJ5"/>
+                                    <constraint firstAttribute="height" constant="26" id="iP4-US-2oB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by Maria" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwE-zP-Y2H">
+                                <rect key="frame" x="236" y="531" width="64" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="Vti-ch-6D3"/>
+                                    <constraint firstAttribute="width" constant="64" id="ZyP-8M-Yfg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="NYt-tB-d6z">
+                                <rect key="frame" x="150" y="300" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="9st-0s-rXK"/>
+                                    <constraint firstAttribute="height" constant="20" id="VlC-vN-MS8"/>
+                                </constraints>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="NYt-tB-d6z" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6xB-ni-Mnz"/>
+                            <constraint firstItem="Vvu-pv-t2R" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8cI-PW-Sm9"/>
+                            <constraint firstItem="PdZ-wm-zi4" firstAttribute="centerX" secondItem="Vvu-pv-t2R" secondAttribute="centerX" id="Eje-EZ-4Nw"/>
+                            <constraint firstItem="NYt-tB-d6z" firstAttribute="top" secondItem="PdZ-wm-zi4" secondAttribute="bottom" constant="78" id="TY7-zK-AFl"/>
+                            <constraint firstItem="PdZ-wm-zi4" firstAttribute="top" secondItem="Vvu-pv-t2R" secondAttribute="bottom" constant="25" id="Uz1-3b-jhI"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="OwE-zP-Y2H" secondAttribute="bottom" constant="20" id="kfO-Hw-5BC"/>
+                            <constraint firstAttribute="trailing" secondItem="OwE-zP-Y2H" secondAttribute="trailing" constant="20" id="oAA-3U-iKH"/>
+                            <constraint firstItem="Vvu-pv-t2R" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="80" id="tPj-9x-8HO"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
@@ -25,4 +72,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="venzel" width="220" height="71"/>
+    </resources>
 </document>

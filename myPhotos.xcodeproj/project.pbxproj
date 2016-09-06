@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C273D8F1D7EEC9B00DF5CA2 /* EmptyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C273D8E1D7EEC9B00DF5CA2 /* EmptyCollectionViewCell.swift */; };
 		4C6454F31D75AAAB003322DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6454F21D75AAAB003322DD /* AppDelegate.swift */; };
 		4C6454FA1D75AAAB003322DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C6454F81D75AAAB003322DD /* Main.storyboard */; };
 		4C6454FD1D75AAAB003322DD /* myPhotos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C6454FB1D75AAAB003322DD /* myPhotos.xcdatamodeld */; };
@@ -34,6 +35,7 @@
 		4CCC1F181D7A379A00E2CBA4 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCC1F171D7A379A00E2CBA4 /* SDWebImage.framework */; };
 		4CCC1F1A1D7A37A400E2CBA4 /* SKPhotoBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCC1F191D7A37A400E2CBA4 /* SKPhotoBrowser.framework */; };
 		4CCC1F1C1D7A37AA00E2CBA4 /* libwebp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCC1F1B1D7A37AA00E2CBA4 /* libwebp.framework */; };
+		4CCC1F291D7DBF2800E2CBA4 /* PureLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CCC1F281D7DBF2800E2CBA4 /* PureLayout.framework */; };
 		A7F0EDC7B019233E85878682 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5DD165833014F89D456D2B /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C273D8E1D7EEC9B00DF5CA2 /* EmptyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyCollectionViewCell.swift; path = Source/Classes/ViewController/Photo/EmptyCollectionViewCell.swift; sourceTree = "<group>"; };
 		4C6454EF1D75AAAB003322DD /* myPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C6454F21D75AAAB003322DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C6454F91D75AAAB003322DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 		4CCC1F171D7A379A00E2CBA4 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "DerivedData/Build/Products/Debug-iphoneos/SDWebImage.framework"; sourceTree = "<group>"; };
 		4CCC1F191D7A37A400E2CBA4 /* SKPhotoBrowser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SKPhotoBrowser.framework; path = "DerivedData/Build/Products/Debug-iphoneos/SKPhotoBrowser.framework"; sourceTree = "<group>"; };
 		4CCC1F1B1D7A37AA00E2CBA4 /* libwebp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libwebp.framework; path = "DerivedData/Build/Products/Debug-iphoneos/libwebp.framework"; sourceTree = "<group>"; };
+		4CCC1F281D7DBF2800E2CBA4 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = "Pods/../build/Debug-iphoneos/PureLayout.framework"; sourceTree = "<group>"; };
 		4D5DD165833014F89D456D2B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C443E5C77A9729E18352A93 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E64F4D50E794F0A4CD1A8B0F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CCC1F291D7DBF2800E2CBA4 /* PureLayout.framework in Frameworks */,
 				4CCC1F1C1D7A37AA00E2CBA4 /* libwebp.framework in Frameworks */,
 				4CCC1F1A1D7A37A400E2CBA4 /* SKPhotoBrowser.framework in Frameworks */,
 				4CCC1F181D7A379A00E2CBA4 /* SDWebImage.framework in Frameworks */,
@@ -135,6 +140,7 @@
 		49EA1F91D0768358EE835923 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CCC1F281D7DBF2800E2CBA4 /* PureLayout.framework */,
 				4CCC1F1B1D7A37AA00E2CBA4 /* libwebp.framework */,
 				4CCC1F191D7A37A400E2CBA4 /* SKPhotoBrowser.framework */,
 				4CCC1F171D7A379A00E2CBA4 /* SDWebImage.framework */,
@@ -279,6 +285,7 @@
 			children = (
 				4C6455491D78436B003322DD /* PhotoViewController.swift */,
 				4C6455501D79A895003322DD /* PhotoCollectionViewCell.swift */,
+				4C273D8E1D7EEC9B00DF5CA2 /* EmptyCollectionViewCell.swift */,
 			);
 			name = Photo;
 			sourceTree = "<group>";
@@ -522,6 +529,7 @@
 				4C6454FD1D75AAAB003322DD /* myPhotos.xcdatamodeld in Sources */,
 				4CCC1F161D7A33BF00E2CBA4 /* HomeViewController.swift in Sources */,
 				4C6455471D783E8A003322DD /* AlbumTableViewCell.swift in Sources */,
+				4C273D8F1D7EEC9B00DF5CA2 /* EmptyCollectionViewCell.swift in Sources */,
 				4C6455511D79A895003322DD /* PhotoCollectionViewCell.swift in Sources */,
 				4C64554F1D787731003322DD /* Photo.swift in Sources */,
 				4C6455691D7A184C003322DD /* ViewController.swift in Sources */,

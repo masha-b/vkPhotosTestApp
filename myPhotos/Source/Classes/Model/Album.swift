@@ -61,7 +61,7 @@ class Album:NSManagedObject{
         self.deleteAllPhotos()
         for photo:Photo in newPhotos {
             self.mutableSetValueForKey("photos").addObject(photo)
-        }        
+        }
         self.save()
     }
     

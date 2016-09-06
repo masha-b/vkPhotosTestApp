@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import CoreData
+import SDWebImage
 
 class AlbumTableViewCell: UITableViewCell {
     
@@ -23,21 +23,27 @@ class AlbumTableViewCell: UITableViewCell {
         didSet {
             self.activityIndicator.hidden = false
             self.activityIndicator.startAnimating()
-            
             self.labelTitle.text = self.album.title as String
             
             if self.album.thumb.length > 0 {
-                imageViewIcon.imageFromURL(self.album.thumb as String, placeholder: UIImage(named: "icon_nophoto")!, fadeIn: true) {
-                    (image: UIImage?) in
-                    if image != nil {
-                        self.imageViewIcon.image = image!.resize(CGSize(width: self.imageViewIcon.frame.size.width*2, height: self.imageViewIcon.frame.size.height*2))
-                        self.activityIndicator.hidden = true
-                    }
-                }
+                let downloader:SDWebImageDownloader = SDWebImageDownloader.sharedDownloader()
+                downloader.downloadImageWithURL(NSURL(string: self.album.thumb as String), options: SDWebImageDownloaderOptions.UseNSURLCache, progress: { (receivedSize, expectedSize) in
+                    
+                    }, completed: { (image, data, error, finished) in
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.activityIndicator.stopAnimating()
+                            if image != nil && finished {
+                                self.imageViewIcon.image = image
+                            }
+                            else {
+                                self.imageViewIcon.image = UIImage(named: "icon_nophoto")!
+                            }
+                        })
+                })
             }
             else {
-                self.activityIndicator.hidden = true
-                imageViewIcon.image = UIImage(named: "icon_nophoto")!
+                self.activityIndicator.stopAnimating()
+                imageViewIcon.image = UIImage(named: "icon_no_album")!
             }
         }
     }

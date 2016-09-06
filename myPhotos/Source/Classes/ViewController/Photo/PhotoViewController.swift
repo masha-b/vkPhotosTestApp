@@ -11,26 +11,67 @@ import VK_ios_sdk
 import CoreData
 import SKPhotoBrowser
 import SDWebImage
+import PureLayout
 
 class PhotoViewController:VkViewController, UICollectionViewDelegate, UICollectionViewDataSource, SKPhotoBrowserDelegate {
     
-    @IBOutlet var collectionView: UICollectionView!
+    let layout: UICollectionViewFlowLayout! = {
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumInteritemSpacing = 10
+        layout.minimumLineSpacing = 10
+        layout.scrollDirection = .Vertical
+        return layout
+    }()
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.whiteColor()
+        refreshControl.addTarget(self, action: #selector(PhotoViewController.vkLoad), forControlEvents: UIControlEvents.ValueChanged)
+        return refreshControl
+    }()
+    lazy var collectionView: UICollectionView = {
+        let view = UICollectionView.init(frame: CGRectZero, collectionViewLayout: self.layout)
+        view.dataSource = self
+        view.delegate = self
+        view.contentMode = .ScaleToFill
+        view.backgroundColor = .clearColor()
+        view.bounces = true
+        view.alwaysBounceVertical = true
+        view.showsVerticalScrollIndicator = false
+        view.configureForAutoLayout()
+        view.addSubview(self.refreshControl)
+        view.registerClass(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        view.registerClass(EmptyCollectionViewCell.self, forCellWithReuseIdentifier: "emptyCell")
+        
+        return view
+    }()
     
     var album:Album!
-    var images = [SKPhotoProtocol]()
-    let refreshControl = UIRefreshControl()
+    var didSetupConstraints = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.title = album.title as String
-        self.makeRefreshControl()
+        
         self.makeItems()
+        
+        self.setData()
     }
     
-    func makeRefreshControl() {
-        refreshControl.tintColor = UIColor.whiteColor()
-        refreshControl.addTarget(self, action: #selector(vkLoad), forControlEvents: .ValueChanged)
-        collectionView!.addSubview(refreshControl)
+    override func loadView() {
+        view = UIView()
+        view.backgroundColor = UIColor(rgba: "#666666")
+        view.addSubview(collectionView)
+        view.setNeedsUpdateConstraints()
+    }
+    
+    override func updateViewConstraints() {
+        if (!didSetupConstraints) {
+            collectionView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 10, left: 10.0, bottom: 10.0, right: 10.0))            
+            didSetupConstraints = true
+        }
+        super.updateViewConstraints()
     }
     
     func makeItems(){
@@ -41,8 +82,8 @@ class PhotoViewController:VkViewController, UICollectionViewDelegate, UICollecti
     }
     
     override func setData() {
-        self.refreshControl.endRefreshing()
         self.collectionView.reloadData()
+        self.refreshControl.endRefreshing()
     }
     
     override func loadData(){
@@ -91,11 +132,11 @@ class PhotoViewController:VkViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if self.album.photos!.count > 0 {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("photoCollectionViewCell", forIndexPath: indexPath) as! PhotoCollectionViewCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! PhotoCollectionViewCell
             cell.photo = album.photos![album.photos!.startIndex.advancedBy(indexPath.row)]
             return cell
         }
-        return collectionView.dequeueReusableCellWithReuseIdentifier("emptyCollectionViewCell", forIndexPath: indexPath)
+        return collectionView.dequeueReusableCellWithReuseIdentifier("emptyCell", forIndexPath: indexPath)
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
