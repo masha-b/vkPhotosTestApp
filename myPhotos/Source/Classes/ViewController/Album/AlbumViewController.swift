@@ -57,6 +57,9 @@ class AlbumViewController:VkViewController {
                 for vkAlbum:NSDictionary in data["items"] as! [NSDictionary] {
                     _albums.append(Album.withDictionary(vkAlbum))
                 }
+            
+            
+            
             weak var weakSelf = self
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 AlbumController.instance.updateAlbums(_albums)

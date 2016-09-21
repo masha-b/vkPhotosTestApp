@@ -60,8 +60,7 @@ class Photo:NSManagedObject{
     }
     
     static func withDictionary(data:NSDictionary!)-> Photo {
-        let context:NSManagedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        return (NSEntityDescription.insertNewObjectForEntityForName("Photo", inManagedObjectContext: context) as! Photo).initWithDictionary(data)
+        return (NSEntityDescription.insertNewObjectForEntityForName("Photo", inManagedObjectContext: CoreDataStack.instance.managedObjectContext) as! Photo).initWithDictionary(data)
     }
     
     func save() {

@@ -22,12 +22,13 @@ class VkViewController: ViewController, VKSdkDelegate, VKSdkUIDelegate {
     func vkLoad() {
         VKInstanse.registerDelegate(self)
         VKInstanse.uiDelegate = self
+        weak var weakSelf = self
         VKSdk.wakeUpSession(Constants.VK_SCOPE) { (state, error) -> Void in
             if state == VKAuthorizationState.Authorized {
-                self.loadData()
+                weakSelf!.loadData()
             } else if error != nil {
-                 self.setData()
-                self.showMessage(MessageType.Error, title: nil, subTitle: error.localizedDescription)
+                weakSelf!.setData()
+                weakSelf!.showMessage(MessageType.Error, title: nil, subTitle: error.localizedDescription)
             } else {
                 VKSdk.authorize(Constants.VK_SCOPE)
             }

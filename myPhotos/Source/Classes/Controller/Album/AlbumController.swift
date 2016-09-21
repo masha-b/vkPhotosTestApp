@@ -14,7 +14,7 @@ class AlbumController {
     
     var vkLoadAlbumParametrs:[NSObject : AnyObject] = ["need_system":"1", "need_covers":"1", "photo_sizes":"1"]
     var albums:[Album]!
-    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let context = CoreDataStack.instance.managedObjectContext
     let request = NSFetchRequest(entityName:"Album")
     
     static let instance = AlbumController()
@@ -24,7 +24,6 @@ class AlbumController {
     }
     
     func loadFromApi()-> VKRequest {
-        print(VKSdk.accessToken().userId)
         vkLoadAlbumParametrs[VK_API_OWNER_ID] = VKSdk.accessToken().userId
         return VKApi.requestWithMethod("photos.getAlbums", andParameters:vkLoadAlbumParametrs)
     }

@@ -87,6 +87,9 @@ class PhotoViewController:VkViewController, UICollectionViewDelegate, UICollecti
     }
     
     override func loadData(){
+        
+        weak var weakSelf = self
+        
         PhotoController.instance.loadFromApi(album).executeWithResultBlock({ (response) -> Void in
             
             let data =  response.json as! NSDictionary
@@ -96,18 +99,36 @@ class PhotoViewController:VkViewController, UICollectionViewDelegate, UICollecti
                 _photos.append(Photo.withDictionary(vkPhoto))
             }
             
-            weak var weakSelf = self
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                weakSelf!.album.updatePhotos(_photos)
-                dispatch_async(dispatch_get_main_queue(), {
-                    weakSelf!.setData()
-                });
-            });
+            let moc = CoreDataStack.instance.managedObjectContext
+            
+            let privateMOC = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+            privateMOC.parentContext = moc
+            privateMOC.performBlock {
+                
+                self.album.mutableSetValueForKey("photos").removeAllObjects()
+                for photo:Photo in _photos {
+                    self.album.mutableSetValueForKey("photos").addObject(photo)
+                }
+                
+                do {
+                    try privateMOC.save()
+                    moc.performBlockAndWait {
+                        do {
+                            try moc.save()
+                            weakSelf?.setData()
+                        } catch {
+                            fatalError("Failure to save context: \(error)")
+                        }
+                    }
+                } catch {
+                    fatalError("Failure to save context: \(error)")
+                }
+            }
             
             }, errorBlock: {
                 (error) -> Void in
                 self.showMessage(.Error, title: nil, subTitle: error.localizedDescription)
-                self.setData()
+                weakSelf?.setData()
         })
     }
     
