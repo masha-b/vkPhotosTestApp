@@ -13,7 +13,7 @@ class EmptyCollectionViewCell: UICollectionViewCell {
     
     lazy var labelText: UILabel = {
         let label = UILabel.newAutoLayoutView()
-        label.font = UIFont(name: "System", size: 15)
+        label.font = UIFont.systemFontOfSize(15)
         label.textColor = .whiteColor()
         label.textAlignment = .Center
         label.lineBreakMode = .ByWordWrapping

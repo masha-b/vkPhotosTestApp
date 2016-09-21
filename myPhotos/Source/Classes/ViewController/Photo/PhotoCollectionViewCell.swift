@@ -21,7 +21,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     }()
     lazy var labelText: UILabel = {
         let label = UILabel.newAutoLayoutView()
-        label.font = UIFont(name: "System", size: 15)
+        label.font = UIFont.systemFontOfSize(15)
         label.textColor = UIColor(rgba: "#4C4C4C")
         label.textAlignment = .Left
         label.lineBreakMode = .ByWordWrapping
@@ -39,8 +39,6 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         view.hidesWhenStopped = true
         return view
     }()
-    
-    var didSetupConstraints = false
     
     required override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,32 +60,27 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(viewText)
         viewText.addSubview(labelText)
         
+        self.initConstraints()
+    }
+    
+    func initConstraints() {
+        imageViewIcon.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 0, left: 0.0, bottom: 0.0, right: 0.0))
+        
+        activityIndicator.autoSetDimension(.Width, toSize: 20)
+        activityIndicator.autoSetDimension(.Height, toSize: 20)
+        activityIndicator.autoAlignAxis(.Horizontal, toSameAxisOfView: self.contentView)
+        activityIndicator.autoAlignAxis(.Vertical, toSameAxisOfView: self.contentView)
+        
+        viewText.autoSetDimension(.Height, toSize: 31, relation: .GreaterThanOrEqual)
+        viewText.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: imageViewIcon, withOffset: 0)
+        viewText.autoPinEdge(.Left, toEdge: .Left, ofView: imageViewIcon, withOffset: 0)
+        viewText.autoPinEdge(.Right, toEdge: .Right, ofView: imageViewIcon, withOffset: 0)
+        
+        labelText.autoSetDimension(.Height, toSize: 0, relation: .GreaterThanOrEqual)
+        labelText.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0))
+        
         self.setNeedsLayout()
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if (!didSetupConstraints) {
-            imageViewIcon.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 0, left: 0.0, bottom: 0.0, right: 0.0))
-            
-            activityIndicator.autoSetDimension(.Width, toSize: 20)
-            activityIndicator.autoSetDimension(.Height, toSize: 20)
-            activityIndicator.autoAlignAxis(.Horizontal, toSameAxisOfView: self.contentView)
-            activityIndicator.autoAlignAxis(.Vertical, toSameAxisOfView: self.contentView)
-            
-            viewText.autoSetDimension(.Height, toSize: 31, relation: .GreaterThanOrEqual)
-            viewText.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: imageViewIcon, withOffset: 0)
-            viewText.autoPinEdge(.Left, toEdge: .Left, ofView: imageViewIcon, withOffset: 0)
-            viewText.autoPinEdge(.Right, toEdge: .Right, ofView: imageViewIcon, withOffset: 0)
-            
-            labelText.autoSetDimension(.Height, toSize: 0, relation: .GreaterThanOrEqual)
-            labelText.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0))
-            
-            didSetupConstraints = true
-            super.setNeedsLayout()
-        }
-    }
-    
     
     var photo:Photo! {
         didSet {

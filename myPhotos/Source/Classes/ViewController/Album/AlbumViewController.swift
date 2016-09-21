@@ -57,12 +57,12 @@ class AlbumViewController:VkViewController {
                 for vkAlbum:NSDictionary in data["items"] as! [NSDictionary] {
                     _albums.append(Album.withDictionary(vkAlbum))
                 }
-            
+            weak var weakSelf = self
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 AlbumController.instance.updateAlbums(_albums)
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.albums = AlbumController.instance.albums
-                    self.setData()
+                    weakSelf!.albums = AlbumController.instance.albums
+                    weakSelf!.setData()
                     });
                 });
                 
@@ -93,7 +93,6 @@ class AlbumViewController:VkViewController {
             if cell == nil {
                 tableView.registerClass(AlbumTableViewCell.classForCoder(), forCellReuseIdentifier: cellIdentifier)
                 cell = AlbumTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellIdentifier)
-                
             }
             cell.selectionStyle = .None
             cell.album = albums[indexPath.row]

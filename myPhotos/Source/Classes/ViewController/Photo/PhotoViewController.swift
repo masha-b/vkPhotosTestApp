@@ -96,16 +96,17 @@ class PhotoViewController:VkViewController, UICollectionViewDelegate, UICollecti
                 _photos.append(Photo.withDictionary(vkPhoto))
             }
             
+            weak var weakSelf = self
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                self.album.updatePhotos(_photos)
+                weakSelf!.album.updatePhotos(_photos)
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.setData()
+                    weakSelf!.setData()
                 });
             });
             
             }, errorBlock: {
                 (error) -> Void in
-                self.showMessage(MessageType.Error, title: nil, subTitle: error.localizedDescription)
+                self.showMessage(.Error, title: nil, subTitle: error.localizedDescription)
                 self.setData()
         })
     }
