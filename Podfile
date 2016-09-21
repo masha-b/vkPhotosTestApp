@@ -3,8 +3,9 @@ platform :ios, :deployment_target => '8.0'
 
 inhibit_all_warnings!
 
-target "myPhotos" do
-    use_frameworks!
+
+target 'myPhotos' do  
+   use_frameworks!
 	pod 'VK-ios-sdk'
 	pod 'SKPhotoBrowser'
 	pod 'CRToast'
